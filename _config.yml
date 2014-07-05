@@ -1,0 +1,14 @@
+markdown: rdiscount
+permalink: /:year/:month/:day/:title.html
+url: http://segdump.github.io
+name: segment dump |HomePage
+author: segdump 
+email: gotosh2014@gmail.com
+duoshuo: segment 
+beian:
+weibo:  
+github: segment 
+pygments: true
+safe: true
+paginate: 20
+about: 
