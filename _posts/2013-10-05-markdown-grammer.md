@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Markdown grammer"
-categories: [others] 
+categories: 
 tags: [Grammer]
 
 
