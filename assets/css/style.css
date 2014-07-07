@@ -213,6 +213,7 @@ a {
 #posts-list {
   width: 420px;
   height: 100%;
+  font-size: 1em;
   background: rgba(250, 250, 250, 0.95);
   border-right: 1px solid #e5e8ec;
   float: left;
