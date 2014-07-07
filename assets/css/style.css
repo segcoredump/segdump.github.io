@@ -127,7 +127,7 @@ a {
 #tags__ul {
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 17px;
   border-top: 1px solid #3c4149;
   border-bottom: 1px solid #525965;
   list-style: none; }
@@ -180,7 +180,7 @@ a {
   bottom: 0; }
   #tags__bottom > .fontello, #tags__bottom > .post__toc-li:before {
     width: 50%;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 44px;
     text-align: center;
     border-top: 1px solid #525965;
