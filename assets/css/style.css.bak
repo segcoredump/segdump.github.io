@@ -86,11 +86,11 @@ a {
   background: #474d57;
 \*---------------------------------*/
 #tags {
-  width: 140px;
+  width: 165px;
   height: 100%;
-  background: #005444;
+  background: #474d57;
   border-right: 1px solid #3c4149;
-  /*box-shadow: inset -15px 0 15px -15px #222;*/
+  box-shadow: inset -15px 0 15px -15px #222;
   float: left;
   position: relative;
   -webkit-user-select: none;
@@ -133,10 +133,7 @@ a {
   list-style: none; }
 
 .tags__li {
-  /*padding: 12px 35px 9px;*/
-  padding: 3px 35px 2px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 12px 35px 9px;
   border-top: 1px solid #525965;
   border-bottom: 1px solid #3c4149;
   cursor: pointer; }
@@ -145,7 +142,7 @@ a {
     color: #020202;
     background: #fafafa;
     border-right: 1px solid #fafafa;
-    /*border-radius: 5px 0 0 5px;*/
+    border-radius: 5px 0 0 5px;
     position: relative;
     -webkit-transition: none;
     -moz-transition: none;
@@ -166,12 +163,12 @@ a {
       top: -6px;
       border-right: 2px solid #fafafa;
       border-bottom: 2px solid #fafafa;
-      /*border-radius: 0 0 6px 0;*/ }
+      border-radius: 0 0 6px 0; }
     .tags__li.active:after {
       bottom: -6px;
       border-right: 2px solid #fafafa;
       border-top: 2px solid #fafafa;
-      /*border-radius: 0 6px 0 0;*/ }
+      border-radius: 0 6px 0 0; }
 
 #tags__bottom {
   width: 100%;
@@ -216,8 +213,6 @@ a {
 #posts-list {
   width: 420px;
   height: 100%;
-  font-size: 15px;
-  letter-spacing: 1px;
   background: rgba(250, 250, 250, 0.95);
   border-right: 1px solid #e5e8ec;
   float: left;
@@ -408,7 +403,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding-top: 1.1em;
   font-size: 2em;
-  font-weight: bold;}
+  font-weight: bold ;}
 
 #post__content > p, #post__content > ul, #post__content > ol {
   margin-top: 1.5em;
