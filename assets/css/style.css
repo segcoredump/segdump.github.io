@@ -369,7 +369,7 @@ a {
     text-shadow: none; }
   @media screen and (max-width: 585px) {
     #post {
-      font-size: 14px; } }
+      font-size: 14.5px; } }
 
 #pjax {
   padding: 0 5% 30px; }
