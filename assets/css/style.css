@@ -229,7 +229,7 @@ a {
   user-select: none; }
   @media screen and (max-width: 720px) {
     #posts-list {
-      width: auto; } }
+      width: 100%; } }
 
 #search-form {
   width: 100%;
