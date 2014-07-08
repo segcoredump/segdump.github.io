@@ -374,10 +374,10 @@ a {
     color: white;
     background: #33caa6;
     text-shadow: none; }
-  @media screen and (max-width: 585px) {
+  @media screen and (max-width: 720px) {
     #post {
       padding-right: 0px;
-      font-size: 1.1em; 
+      font-size: 17em; 
       line-height: 1.6;} }
 
 #pjax {
