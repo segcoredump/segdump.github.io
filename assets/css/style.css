@@ -411,7 +411,14 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   line-height: 3;
   text-decoration: underline;}
-
+  @media screen and (max-width: 585px) {
+    #post {
+      padding-top: 1.1em;
+      font-size: 1.2em;
+      font-weight: bold;
+      line-height: 2;
+      text-decoration: underline;} }
+   
 #post__content > p, #post__content > ul, #post__content > ol {
   margin-top: 1.5em;
   margin-bottom: 1.5em; }
