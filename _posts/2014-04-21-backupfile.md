@@ -5,7 +5,11 @@ categories: [shell]
 tags: [shell]
 
 ---
-   
+ 
+###[转载请注明]   转自：<http://segdump.github.io>
+
+
+
     #!/usr/bin/bash
     #backupfile
     #逐个文件夹递归备份文件
