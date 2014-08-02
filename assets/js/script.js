@@ -14,11 +14,11 @@ if ($(window).width() <= 1280) {
     tag1       = $('.pl__all'),
     tag2       = $('.linux'),
     tag3       = $('.c++'),
-    tag4       = $('.clanguage'),
+    tag4       = $('.c语言'),
     tag5       = $('.python'),
     tag6       = $('.shell'),
-    tag7       = $('.database');
-    tag8       = $('.algorithm');
+    tag7       = $('.数据库');
+    tag8       = $('.算法');
 
 var sidebar    = $('#sidebar'),
     container  = $('#post'),
