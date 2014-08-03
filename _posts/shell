@@ -1,0 +1,95 @@
+---
+layout: post
+title: "shell之字符串操作"
+categories: [shell]
+tags: [shell]
+
+---
+
+
+字符串长度:
+	
+	str="string"
+	echo ${#str}	#6
+	expr length $str	#6
+	expr "$str" : ".*"	#6
+	
+
+字符查找:
+	
+	# expr index $string substring
+	# 返回string中包含substring中任意字符的第一个位置。
+	str="string"
+	expr index $str "ng"	#5
+	expr index $str "io"	#4
+	expr index $str "mu"	#0
+
+判断读取字符串值:
+
+	${var}				# 变量var的值, 与$var相同	 
+	${var-default}	# 如果var没有被声明, 那么就以$default作为其值
+	${var:-default}	# 如果var没有被声明, 或者其值为空, 那么就以$default作为其值 
+	${var=default}	# 如果var没有被声明, 那么就以$DEFAULT作为其值
+	${var:=default}	# 如果var没有被声明, 或者其值为空, 那么就以$default作为其值  
+	${var+other}		# 如果var声明了, 那么其值就是$other, 否则就为空字符串
+	${var:+other}		# 如果var被设置了, 那么其值就是$other, 否则就为空字符串	 
+	${var?ErrMsg}		# 如果var没被声明, 那么就打印$ErrMsg
+	${var:?ErrMsg}	# 如果var没被设置, 那么就打印$ErrMsg 
+	${!varprefix*}	# 匹配之前所有以varprefix开头进行声明的变量
+	${!varprefix@}	# 匹配之前所有以varprefix开头进行声明的变量
+
+截取子串:
+	
+	# 返回一个以StartPosition的字符开始的在 String中的字符串，并且是 Length长度的字符串。
+	expr substr String StartPosition Length	
+	
+	${string:position}		# 在$string中, 从位置$position开始提取子串
+	
+	# 在$string中, 从位置$position开始提取长度为$length的子串
+ 	${string:position:length}	 
+	
+	${string#substring}		# 从变量$string的开头, 删除最短匹配$substring的子串
+	${string##substring}		# 从变量$string的开头, 删除最长匹配$substring的子串
+	${string%substring}		# 从变量$string的结尾, 删除最短匹配$substring的子串
+	${string%%substring}		# 从变量$string的结尾, 删除最长匹配$substring的子串
+	
+	
+字符串替换:
+
+	# 使用$replacement, 来代替第一个匹配的$substring
+	${string/substring/replacement}
+
+	# 使用$replacement, 代替所有匹配的$substring
+	${string//substring/replacement}	
+
+	# 如果$string的前缀匹配$substring, 那么就用$replacement来代替匹配到的$substring
+	${string/#substring/replacement}	
+
+	# 如果$string的后缀匹配$substring, 那么就用$replacement来代替匹配到的$substring
+	${string/%substring/replacement}
+	
+
+字符串比较:
+
+	[[ "string" == s* ]]		# 逻辑真 (pattern matching)
+	[[ "string" =~ .* ]]		# 逻辑真 (regex matching)
+	[[ "abc" == "abc" ]]		# 逻辑真 (string comparision) 
+	[ "$a" = "$b" ]			# 等于
+	[ "$a" == "$b" ]			# 等于,与=等价
+	[[ "$" < "$b" ]]			# 小于,按ascii值比较
+	[ "$a" \< "$b" ]			# 小于,按ascii值比较
+	[[ "$" > "$b" ]]			# 大于,按ascii值比较
+	[ "$a" \> "$b" ]			# 大于,按ascii值比较
+	[ "$a" != "b" ]			# 不等于
+	[[ "abcd" != a* ]]		# 逻辑假 (pattern matching)
+	[ -z "$a" ]				# $a为null,逻辑真
+	[ -n "$a" ]				# $a不为null,逻辑真
+	
+字符串连接:
+
+	s1="shell"
+	s2="string"
+	echo ${s1}${s2}	# shellstring
+	echo ${s1}"new"	# shellnew
+ 
+	
