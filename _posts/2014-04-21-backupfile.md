@@ -8,6 +8,7 @@ tags: [shell]
  
 ###[转载请注明]   转自：<http://segdump.github.io>
 
+linux/unix下,有时候rm了不该rm的文件，给使用带来很大的不便,于是用shell写了一个备份工具,递归的备份文件、文件夹，可以替换掉rm的操作。
 
 
     #!/usr/bin/bash
