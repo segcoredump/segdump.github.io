@@ -13,7 +13,7 @@ if ($(window).width() <= 1280) {
 // Variables
     tag1       = $('.pl__all'),
     tag2       = $('.linux'),
-    tag3       = $('.C﹢﹢'),
+    tag3       = $('.C十十'),
     tag4       = $('.c语言'),
     tag5       = $('.python'),
     tag6       = $('.shell'),
