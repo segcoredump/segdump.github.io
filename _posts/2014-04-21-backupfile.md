@@ -15,6 +15,7 @@ linux/unix下,有时候rm了不该rm的文件，给使用带来很大的不便,�
     #backupfile
     #逐个文件夹递归备份文件
     #输入为一个或多个文件、文件夹
+   
     hmdir="$HOME"
     bkdir="${HOME}/backup"
     dt=$(date +%Y%m%d)
