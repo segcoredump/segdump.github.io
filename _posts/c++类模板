@@ -1,0 +1,194 @@
+上一篇文章用实例讲述的了函数模板，包括模板的定义、模板形参、模板类型形参等基础知识，这些同样适用于类模板，本篇文章就不再重述。下面用实例来说明的类模板的使用：
+
+	/*
+	 *类模板
+	 */
+
+	#include <iostream>
+	#include <string>
+
+	using namespace std;
+
+	//非类型形参  类模板
+	template <int hi,int wid>
+	class Screen
+	{
+		public:
+			Screen():screen(hi * wid,'#'),height(hi),width(wid){};
+			void out()
+			{
+				cout<<"Screen : "<<screen<<","<<height<<","<<width<<endl;
+			}
+
+		private:
+			string screen;
+			string::size_type height,width;
+	};	
+
+	//类型形参 类模板
+
+	/*
+	 * 类模板中的友元声明：
+	 * 		普通非模板类或函数的友元声明，将友元关系授予明确指定的类或函数
+	 *		类模板或函数模板的友元声明，授予对友元所有实例的访问权
+	 *		只授予对类模板或函数模板的特定实例的访问权的友元声明
+	 *
+	 */
+
+	template <class T> class E;
+	template <class T> void fcn2(const T&);
+
+	template <class T1,class T2>
+	class ctemp 
+	{
+		friend class B;      //普通友元
+		friend void fcn();   //非模板类或非模板函数
+
+		template <class T> friend class D;              //一般模板友元
+		template <class T> friend void fcn1(const T&);  //类模板或函数模板
+		
+		friend class E<int>;                      //特定的模板友元
+		friend void fcn2<int>(int const &);       //只授予对特定实例的访问权
+
+		public:
+			ctemp(T1 svar,T2 dvar);
+			void display(ctemp &ctemp);
+			template <class T> class cmem;    //类成员模板
+			template <class Type> void sum(ctemp &c);  //函数成员模板
+
+		private:
+			T1 svar;
+			T2 dvar;
+
+	};		
+			
+	template <class T1,class T2>
+	ctemp<T1,T2>::ctemp(T1 svar,T2 dvar):svar(svar),dvar(dvar){};
+
+	template <class T1,class T2>
+	void ctemp<T1,T2>::display(ctemp &a)
+	{
+		cout<<"template T1 T2 : "<<a.svar<<","<<a.dvar<<endl;
+	}
+
+	/*
+	 * 任意类(模板或非模板)可以拥有本身为类模板或函数模板的成员，
+	 * 这种成员称为成员模板，成员模板不能为虚。
+	 *
+	 */
+
+	/*
+	 * 类成员模板外部定义
+	 * 在类模板作用域外部定义成员模板时，必须包含两个模板形参表
+	 *
+	 */
+	template<class T1,class T2> template <class T>
+	class ctemp<T1,T2>::cmem
+	{
+		public:
+			void cmem_out();
+	};
+
+	/*
+	 * 成员模板类成员函数外部定义
+	 */
+	template<class T1,class T2> template<class T>
+	void ctemp<T1,T2>::cmem<T>::cmem_out()
+	{
+		cout<<"member class template cmem"<<endl;
+	}
+
+	/*
+	 * 成员模板函数外部定义
+	 */
+	template<class T1,class T2> template <class Type> 
+	void ctemp<T1,T2>::sum(ctemp &c)
+	{
+		cout<<"svar+dvar = "<<(c.svar+c.dvar)<<endl;
+	}
+
+	/*
+	 * 只特化成员函数，不特化类
+	 * 成员函数特化与任何其他函数模板特化一样，必须以空的模板
+	 *
+	 */
+	template <>
+	void ctemp<double,double>::display(ctemp &a)
+	{
+		cout<<a.svar<<","<<a.dvar<<endl;
+	}
+
+	/*
+	 * 类模板部分特化
+	 * 类模板部分特化本身也是模板
+	 *
+	 */
+	template <class T1>
+	class ctemp <T1,string>
+	{
+		public:
+			ctemp(T1 svar,string dvar);
+			void display(ctemp &a);
+
+		private:
+			T1 svar;
+			string dvar;
+
+	};
+
+	template<class T1>
+	ctemp<T1,string>::ctemp(T1 svar,string dvar):svar(svar),dvar(dvar){};
+
+	template<class T1>
+	void ctemp<T1,string>::display(ctemp &a)
+	{
+		cout<<"template T1 string : "<<a.svar<<","<<a.dvar<<endl;
+	}
+
+	//类模板全特化
+	template <>
+	class ctemp<string,string> 
+	{
+		public:
+			ctemp(string svar,string dvar);
+			void display(ctemp &a);
+
+		private:
+			string svar;
+			string dvar;
+
+	};
+
+	ctemp<string,string>::ctemp(string svar,string dvar):svar(svar),dvar(dvar){};
+
+	/*
+	 * 在类特化外部定义成员时，成员之前不能加template<>
+	 *
+	 */
+
+	void ctemp<string,string>::display(ctemp &a)
+	{
+		cout<<"template string string : "<<a.svar<<","<<a.dvar<<endl;
+	};
+
+
+	int main()
+	{
+		Screen<4,8> s;                //类模板　　非类型形参
+		s.out();
+
+		ctemp<int,int> ct(20,30);    //类模板  类型形参
+		ct.display(ct);
+		ct.sum<int>(ct);             //成员模板函数
+
+		ctemp<int,int>::cmem<string> cm; //成员模板类 
+		cm.cmem_out();
+
+		ctemp<double,string> ct1(30.2,"dobule");  //类模板部分特化
+		ct1.display(ct1);
+
+		ctemp<string,string> ct2("string","string"); //类模板全特化
+		ct2.display(ct2);
+
+		return 0;
+	}
