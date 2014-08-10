@@ -492,7 +492,7 @@ iframe {
     -ms-transform: translateX(0);
     -o-transform: translateX(0);
     transform: translateX(0); }
-  @media screen and (max-device-width: 1280px) {
+  @media screen and (max-device-width: 1080px) {
     #post__toc-trigger {
       display: none; } }
 
