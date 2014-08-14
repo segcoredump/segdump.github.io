@@ -1,0 +1,104 @@
+---
+layout: post
+title: "C++虚函数"
+categories: 'c＋＋'
+tags:
+---
+
+
+C++中虚函数的主要作用是实现多态机制，多态的实现离不开继承。关于继承在前面已经用实例进行了说明。这篇文章来看一下虚函数、纯虚函数的用法。
+
+	//为了清晰，所有成员函数都在类内部定义
+	
+	/*
+	 *虚函数、纯虚函数
+	 */
+
+	#include <iostream>
+
+	using namespace std;
+
+	class base
+	{
+		public:
+			void normal_func()           //普通成员函数
+			{
+				cout<<"class base normal function"<<endl;
+			}
+			virtual void virtual_func()    //虚函数
+			{
+				cout<<"class base virtual function"<<endl;
+			}
+
+			virtual void pure_virtual_func()=0;   //纯虚函数,只能在此声明，在派生类中定义
+
+	};
+
+	class derived_one:public base
+	{
+		public:
+			void normal_func()
+			{
+				cout<<"class derived_one normal function"<<endl;
+			}
+			void virtual_func()         //派生类重写虚函数时，不用加virtual
+			{
+				cout<<"class derived_one virtual function"<<endl;
+			}
+
+			virtual void pure_virtual_func()
+			{
+				base::virtual_func();    //覆盖派生虚函数，直接调用基类虚函数，编译时确定
+				cout<<"class derived_one pure virtual function"<<endl;
+			}
+	};
+
+	class derived_two:public base
+	{
+		public:
+			void pure_virtual_func()
+			{
+				cout<<"class derived_two pure virtual function"<<endl;
+			}
+	};
+
+	class derived_three:public base
+	{
+	};
+
+	/*
+	 * c++中的函数调用默认不使用动态绑定，要触发动态绑定，必须满足两个条件：
+	 * 	1、只有指定为虚函数的成员函数才能进行动态绑定，成员函数默认为非虚函数，非虚函数不进行动态绑定
+	 * 	2、必须通过基类类型的引用或指针进行函数调用，
+	 */
+
+	int main()
+	{
+		//base b;                //含有（或继承）一个或多个纯虚函数的类是抽象基类,不能创建抽象类型的对象。
+		//derived_three dt;     //不能定义derived_two对象，因为derived_two没有定义基类的纯虚函数，derived_two仍是抽象类
+
+		base *pb=new derived_one();  //基类指针动态绑定
+		pb->virtual_func();
+		pb->pure_virtual_func();
+		pb->normal_func();          //非虚函数在编译时根据调用该函数的对象、引用或指针的类型而确定。
+
+		derived_two dt;
+		base &pb1=dt;                //基类引用动态绑定
+		pb1.virtual_func();          //派生类没有重写virtual_func()，则调用从基类继承过来的virtual_func()
+		pb1.pure_virtual_func();
+		pb1.normal_func();          //基类引用，调用基类normal_func()
+
+		pb->base::virtual_func();     //覆盖派生虚函数
+
+
+		delete pb;
+
+		return 0;
+	}
+
+
+即使有了虚函数和继承，也要通过基类的指针或引用才能实现动态绑定，也就是基类指针或引用的动态类型。通过基类引用或指针调用基类中定义的函数时，我们并不知道执行函数的对象的确切类型，执行函数的对象可能是基类类型的，也可能是派生类类型的。如果调用虚函数，则直到运行时才能确定调用哪个函数，运行的虚函数是引用所绑定的或指针所指向的对象所属类型定义的版本。但是如果调用非虚函数，则无论实际对象是什么类型，都执行基类类型所定义的函数，也就是指针或引用的静态类型。
+
+引用和指针的静态类型与动态类型的不同，是C++用以支持多态性的基石，只有通过引用或指针调用，虚函数才在运行时确定。只有在这些情况下，直到运行时才知道对象的动态类型。
+
+这篇文章只是讲解了虚函数的基本用法。下一篇文章将重点剖析一下虚函数的机制。
